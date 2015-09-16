@@ -68,6 +68,7 @@
     <Compile Include="CardTests.cs" />
     <Compile Include="DeckCreatorTests.cs" />
     <Compile Include="DeckTests.cs" />
+    <Compile Include="ImagePositions\RectangularCardImagePositionProviderTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

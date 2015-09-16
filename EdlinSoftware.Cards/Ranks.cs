@@ -1,4 +1,6 @@
-﻿namespace EdlinSoftware.Cards
+﻿using System.Diagnostics;
+
+namespace EdlinSoftware.Cards
 {
     /// <summary>
     /// Represents ranks of cards.
@@ -28,6 +30,7 @@
         /// <param name="rank">Rank of card.</param>
         /// <param name="suit">Suit of card.</param>
         /// <returns>One card.</returns>
+        [DebuggerStepThrough]
         public static Card Of(this Ranks rank, Suits suit)
         {
             return new Card(rank, suit);
