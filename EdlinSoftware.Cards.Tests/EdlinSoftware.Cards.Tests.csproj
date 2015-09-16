@@ -64,6 +64,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CardsProviderTest.cs" />
     <Compile Include="CardTests.cs" />
     <Compile Include="DeckCreatorTests.cs" />
     <Compile Include="DeckTests.cs" />
