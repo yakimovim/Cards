@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+    <package>
+        <metadata>
+            <id>EdlinSoftware.Cards</id>
+            <version>1.0.0</version>
+            <authors>Ivan Iakimov</authors>
+            <owners>Ivan Iakimov</owners>
+            <projectUrl>https://github.com/yakimovim/Cards</projectUrl>
+            <requireLicenseAcceptance>false</requireLicenseAcceptance>
+            <description>A library for support of work with playing cards.</description>
+            <releaseNotes>This is an initial release.</releaseNotes>
+            <copyright>Copyright EdlinSoftware 2015</copyright>
+            <tags>Cards Game</tags>
+            <title>EdlinSoftware Cards Library</title>
+        </metadata>
+        <files>
+            <file src="..\EdlinSoftware.Cards\bin\Release\EdlinSoftware.Cards.dll" target="lib\net46" />
+        </files>
+    </package>
