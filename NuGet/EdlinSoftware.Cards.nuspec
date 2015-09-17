@@ -2,13 +2,13 @@
     <package>
         <metadata>
             <id>EdlinSoftware.Cards</id>
-            <version>1.0.1</version>
+            <version>1.0.2</version>
             <authors>Ivan Iakimov</authors>
             <owners>Ivan Iakimov</owners>
             <projectUrl>https://github.com/yakimovim/Cards</projectUrl>
             <requireLicenseAcceptance>false</requireLicenseAcceptance>
             <description>A library for support of work with playing cards.</description>
-            <releaseNotes>Support of endless cards provider is added.</releaseNotes>
+            <releaseNotes>Providers of image positions for cards were added.</releaseNotes>
             <copyright>Copyright EdlinSoftware 2015</copyright>
             <tags>Cards Game</tags>
             <title>EdlinSoftware Cards Library</title>
