@@ -2,7 +2,6 @@
 
 namespace EdlinSoftware.Cards.ImagePositions
 {
-    [DebuggerDisplay("Rect: at ({Left}, {Top}) with size {Width} x {Height}")]
     public struct Rect
     {
         [DebuggerStepThrough]
@@ -51,6 +50,11 @@ namespace EdlinSoftware.Cards.ImagePositions
                 hashCode = (hashCode*397) ^ Height.GetHashCode();
                 return hashCode;
             }
+        }
+
+        public override string ToString()
+        {
+            return $"Rect: at ({Left}, {Top}) with size {Width} x {Height}";
         }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using EdlinSoftware.Cards.ImagePositions;
+using Ploeh.AutoFixture;
 using Xunit;
 using static EdlinSoftware.Cards.Ranks;
 using static EdlinSoftware.Cards.Suits;
@@ -8,90 +9,55 @@ namespace EdlinSoftware.Cards.Tests.ImagePositions
     public class RectangularCardImagePositionProviderTest
     {
         private readonly RectangularDeckImageDescription _description;
+        private readonly Fixture _fixture;
+        private readonly Size _cardSize;
 
         public RectangularCardImagePositionProviderTest()
         {
+            _fixture = new Fixture();
+
+            _cardSize = _fixture.Create<Size>();
+
             _description = new RectangularDeckImageDescription
             {
-                ImageWidth = 2179,
-                ImageHeight = 1216,
-                HorizontalOffsetOfFirstCard = 0.0,
-                VerticalOffsetOfFirstCard = 0.0,
-                CardWidth = 167.6,
-                CardHeight = 243.2,
-                HorizontalSpacingBetweenCards = 0.0,
-                VerticalSpacingBetweenCards = 0.0,
+                CardWidth = _cardSize.Width,
+                CardHeight = _cardSize.Height,
                 Ranks = new[]
                 {
                     Ace, Two, Three, Four, Five, Six, Seven, Eight, Nine, Ten, Jack, Queen, King
                 },
                 Suits = new[] { Clubs, Diamonds, Hearts, Spades }
             };
+
+            _fixture.Inject<IRectangularDeckImageDescription>(_description);
         }
 
         [Fact]
         public void GetCardSize_ReturnsCorrectSize()
         {
-            var provider = new RectangularCardImagePositionProvider(_description);
+            var provider = _fixture.Create<RectangularCardImagePositionProvider>();
 
-            Assert.Equal(new Size(167.6, 243.2), provider.GetCardSize());
+            Assert.Equal(_cardSize, provider.GetCardSize());
         }
 
-        [Fact]
-        public void GetCardRectangle_ReturnsCorrectRect_NoOffset_NoSpacing()
+        [Theory]
+        [InlineData(10.0, 5.0, 20.0, 15.0)]
+        [InlineData(0.0, 0.0, 20.0, 15.0)]
+        [InlineData(10.0, 5.0, 0.0, 0.0)]
+        [InlineData(0.0, 0.0, 0.0, 0.0)]
+        public void GetCardRectangle_ReturnsCorrectRect_Offset_Spacing(
+            double hOffset,
+            double vOffset,
+            double hSpace,
+            double vSpace)
         {
-            var provider = new RectangularCardImagePositionProvider(_description);
+            _description.HorizontalOffsetOfFirstCard = hOffset;
+            _description.VerticalOffsetOfFirstCard = vOffset;
 
-            var size = provider.GetCardSize();
+            _description.HorizontalSpacingBetweenCards = hSpace;
+            _description.VerticalSpacingBetweenCards = vSpace;
 
-            Assert.Equal(new Rect(0 * size.Width, 0 * size.Height, size), provider.GetCardRectangle(Ace.Of(Clubs)));
-            Assert.Equal(new Rect(12 * size.Width, 0 * size.Height, size), provider.GetCardRectangle(King.Of(Clubs)));
-            Assert.Equal(new Rect(12 * size.Width, 3 * size.Height, size), provider.GetCardRectangle(King.Of(Spades)));
-            Assert.Equal(new Rect(0 * size.Width, 3 * size.Height, size), provider.GetCardRectangle(Ace.Of(Spades)));
-        }
-
-        [Fact]
-        public void GetCardRectangle_ReturnsCorrectRect_Offset_NoSpacing()
-        {
-            var hOffset = _description.HorizontalOffsetOfFirstCard = 20.0;
-            var vOffset = _description.VerticalOffsetOfFirstCard = 15.0;
-
-            var provider = new RectangularCardImagePositionProvider(_description);
-
-            var size = provider.GetCardSize();
-
-            Assert.Equal(new Rect(hOffset + 0 * size.Width, vOffset + 0 * size.Height, size), provider.GetCardRectangle(Ace.Of(Clubs)));
-            Assert.Equal(new Rect(hOffset + 12 * size.Width, vOffset + 0 * size.Height, size), provider.GetCardRectangle(King.Of(Clubs)));
-            Assert.Equal(new Rect(hOffset + 12 * size.Width, vOffset + 3 * size.Height, size), provider.GetCardRectangle(King.Of(Spades)));
-            Assert.Equal(new Rect(hOffset + 0 * size.Width, vOffset + 3 * size.Height, size), provider.GetCardRectangle(Ace.Of(Spades)));
-        }
-
-        [Fact]
-        public void GetCardRectangle_ReturnsCorrectRect_NoOffset_Spacing()
-        {
-            var hSpace = _description.HorizontalSpacingBetweenCards = 20.0;
-            var vSpace = _description.VerticalSpacingBetweenCards = 15.0;
-
-            var provider = new RectangularCardImagePositionProvider(_description);
-
-            var size = provider.GetCardSize();
-
-            Assert.Equal(new Rect(0 * size.Width, 0 * size.Height, size), provider.GetCardRectangle(Ace.Of(Clubs)));
-            Assert.Equal(new Rect(12 * size.Width + 11 * hSpace, 0 * size.Height, size), provider.GetCardRectangle(King.Of(Clubs)));
-            Assert.Equal(new Rect(12 * size.Width + 11 * hSpace, 3 * size.Height + 2 * vSpace, size), provider.GetCardRectangle(King.Of(Spades)));
-            Assert.Equal(new Rect(0 * size.Width, 3 * size.Height + 2 * vSpace, size), provider.GetCardRectangle(Ace.Of(Spades)));
-        }
-
-        [Fact]
-        public void GetCardRectangle_ReturnsCorrectRect_Offset_Spacing()
-        {
-            var hOffset = _description.HorizontalOffsetOfFirstCard = 10.0;
-            var vOffset = _description.VerticalOffsetOfFirstCard = 5.0;
-
-            var hSpace = _description.HorizontalSpacingBetweenCards = 20.0;
-            var vSpace = _description.VerticalSpacingBetweenCards = 15.0;
-
-            var provider = new RectangularCardImagePositionProvider(_description);
+            var provider = _fixture.Create<RectangularCardImagePositionProvider>();
 
             var size = provider.GetCardSize();
 

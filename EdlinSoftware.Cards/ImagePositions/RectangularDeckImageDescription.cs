@@ -10,15 +10,6 @@
     public interface IRectangularDeckImageDescription
     {
         /// <summary>
-        /// Width of image in pixels.
-        /// </summary>
-        int ImageWidth { get; }
-        /// <summary>
-        /// Height of image in pixels.
-        /// </summary>
-        int ImageHeight { get; }
-
-        /// <summary>
         /// Horizontal offset of first card from top-left corner of the image in pixels.
         /// </summary>
         double HorizontalOffsetOfFirstCard { get; }
@@ -64,15 +55,6 @@
     /// </summary>
     public class RectangularDeckImageDescription : IRectangularDeckImageDescription
     {
-        /// <summary>
-        /// Width of image in pixels.
-        /// </summary>
-        public int ImageWidth { get; set; }
-        /// <summary>
-        /// Height of image in pixels.
-        /// </summary>
-        public int ImageHeight { get; set; }
-
         /// <summary>
         /// Horizontal offset of first card from top-left corner of the image in pixels.
         /// </summary>

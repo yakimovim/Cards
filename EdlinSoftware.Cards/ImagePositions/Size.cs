@@ -2,7 +2,6 @@
 
 namespace EdlinSoftware.Cards.ImagePositions
 {
-    [DebuggerDisplay("Size: {Width} x {Height}")]
     public struct Size
     {
         [DebuggerStepThrough]
@@ -32,6 +31,11 @@ namespace EdlinSoftware.Cards.ImagePositions
             {
                 return (Width.GetHashCode()*397) ^ Height.GetHashCode();
             }
+        }
+
+        public override string ToString()
+        {
+            return $"Size: {Width} x {Height}";
         }
     }
 }

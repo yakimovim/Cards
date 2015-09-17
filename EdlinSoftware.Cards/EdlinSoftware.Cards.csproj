@@ -44,6 +44,8 @@
     <Compile Include="Deck.cs" />
     <Compile Include="IDeckCreator.cs" />
     <Compile Include="IEndlessCardsProvider.cs" />
+    <Compile Include="ImagePositions\OneCardImageDescription.cs" />
+    <Compile Include="ImagePositions\OneCardImagePositionProvider.cs" />
     <Compile Include="ImagePositions\RectangularCardImagePositionProvider.cs" />
     <Compile Include="ImagePositions\Rect.cs" />
     <Compile Include="ImagePositions\RectangularDeckImageDescription.cs" />
